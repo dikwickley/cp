@@ -2,14 +2,11 @@
 
 echo "Updating to github"
 
-echo $(date)
-
-msg="cp: $now"
-
-echo msg
+now="$(date)"
+msg="$now"
 
 git add .
-git commit -m $msg
+git commit -m "$msg"
 git push origin main
 
 echo "done"
