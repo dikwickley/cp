@@ -3,5 +3,7 @@
 echo "Updating to github"
 
 git add .
-git commit -m "cp"
+git commit -m "cp: $date"
 git push origin main
+
+echo "done"
