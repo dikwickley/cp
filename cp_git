@@ -2,6 +2,8 @@
 
 echo "Updating to github"
 
+echo $(date)
+
 msg="cp: $now"
 
 echo msg
