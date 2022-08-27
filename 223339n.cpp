@@ -1,0 +1,93 @@
+
+#include <bits/stdc++.h>
+#define io  ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+using namespace std;
+ 
+//debugger start
+void __print(int x) {cerr << x;}
+void __print(long x) {cerr << x;}
+void __print(long long x) {cerr << x;}
+void __print(unsigned x) {cerr << x;}
+void __print(unsigned long x) {cerr << x;}
+void __print(unsigned long long x) {cerr << x;}
+void __print(float x) {cerr << x;}
+void __print(double x) {cerr << x;}
+void __print(long double x) {cerr << x;}
+void __print(char x) {cerr << '\'' << x << '\'';}
+void __print(const char *x) {cerr << '\"' << x << '\"';}
+void __print(const string &x) {cerr << '\"' << x << '\"';}
+void __print(bool x) {cerr << (x ? "true" : "false");}
+ 
+template<typename T, typename V>
+void __print(const pair<T, V> &x) {cerr << '{'; __print(x.first); cerr << ','; __print(x.second); cerr << '}';}
+template<typename T>
+void __print(const T &x) {int f = 0; cerr << '{'; for (auto &i: x) cerr << (f++ ? "," : ""), __print(i); cerr << "}";}
+void _print() {cerr << "]\n";}
+template <typename T, typename... V>
+void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v...);}
+#ifndef ONLINE_JUDGE
+#define debug(x...)  cerr<<"l "<<__LINE__<<": "<< "[" << #x << "] = ["; _print(x)
+// #define debugf(s, x...) cerr<<"l "<<__LINE__<<": "<<s<<" : "<< "[" << #x << "] = ["; _print(x)
+#else
+#define debug(x...)
+#endif
+//debugger end
+
+void col(vector<int> &a, vector<int>b, int j, int c){
+	if(j==c) return;
+	a[j] += b[j];
+	col(a[j], b[j], j+1, c);
+}
+
+void row(vector<vector<int>> &a,vector<vector<int>> b, int i, int j, int r, int c){
+	if(i==r) return;
+
+	col(a[i],b[i], j,c);
+
+	row(a,b,i+1,j,r,c);
+}
+ 
+void solve() {
+    int r,c;
+    cin>>r>>c;
+
+    vector<vector<int>> a;
+    vector<vector<int>> b;
+
+    for(int i=0;i<r;i++)
+    	for(int j=0;j<c;j++){
+    		int w;
+    		cin>>w;
+    		a[i][j] = w;
+    	}
+
+    for(int i=0;i<r;i++)
+    	for(int j=0;j<c;j++){
+    		int w;
+    		cin>>w;
+    		b[i][j] = w;
+    	}
+
+    row(a,b,0,0,r,c);
+
+    for(int i=0;i<r;i++)
+    	for(int j=0;j<c;j++){
+    		cout<<a[i][j]<<" \n"[j==c];
+    	}
+
+
+
+
+}
+ 
+int main() { io
+    #ifndef ONLINE_JUDGE
+        freopen("error.err", "w", stderr);
+    #endif
+    int t=1; 
+    // cin>>t; 
+    while (t--) {
+        solve();
+    }
+    return 0;
+}
