@@ -1,0 +1,7 @@
+#!/bin/bash
+
+echo "Updating to github"
+
+git add .
+git commit -m "cp"
+git push origin main
