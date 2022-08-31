@@ -34,73 +34,33 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 //debugger end
  
 void solve() {
-    int n;
-    cin>>n;
-    vector<int> a(n);
-    vector<int> b(n);
+    int n,q;
+    cin>>n>>q;
 
-    for(int i=0;i<n;i++) cin>>a[i];
-    for(int i=0;i<n;i++) cin>>b[i];
+    vector<pair<int,int>> rec(n);
+    vector<long long> area(n); 
 
-    debug(a);
-	debug(b);
+    for(int i=0;i<n;i++) {
+    	cin>>rec[i].first>>rec[i].second;
+    	area[i] = rec[i].first * rec[i].second;
+    }
 
-	vector<pair<int,int>> bitmap;
+    long long int ans = 0;
+    while(q--){
+    	
+    	int a,b,c,d;
+    	cin>>a>>b>>c>>d;
 
-
-	for(int i=0;i<n;i++){
-		bitmap.push_back({a[i],0});
-		bitmap.push_back({b[i],1});
-	}
-
-
-	sort(bitmap.begin(), bitmap.end());
-
-	debug(bitmap);
-
-	int x=bitmap.size()-1; //max 1
-	int y=bitmap.size()-1; //min 1
-
-	vector<int> d_min;
-	vector<int> d_max;
-
-	int one_count = 0;
-	int zero_count = 0;
-
-	for(int i=bitmap.size()-1;i>=0;i--){
-
-
-		
-		if(bitmap[i].second==1){
-			y=i;
-		}
-
-		if(bitmap[i].second==0){
-			debug(bitmap[i].first, x);
-			d_max.push_back(bitmap[x].first - bitmap[i].first);
-			d_min.push_back(bitmap[y].first - bitmap[i].first);
-		}
-
-		if(bitmap[i].second==1) one_count++;
-		if(bitmap[i].second==0) zero_count++;
-
-		if(one_count==zero_count){
-
-			x=i-1;
-			y=i-1;
-		}
-
-
-
-	}
-
-
-	for(int i=n-1;i>=0;i--) cout<<d_min[i]<<" \n"[i==0];
-
-	for(int i=n-1;i>=0;i--) cout<<d_max[i]<<" \n"[i==0];
-
-
-
+    	for(int i=0;i<n;i++){
+    		if(rec[i].first > a && rec[i].first < c){
+    			if(rec[i].second > b && rec[i].second){
+    				ans += rec[i].first * rec[i].second;
+    			}
+    		}
+    	}
+    	
+    }
+    cout<<ans<<endl;
 
 }
  
