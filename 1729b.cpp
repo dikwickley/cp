@@ -34,38 +34,32 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 //debugger end
  
 void solve() {
-    int n;
-    cin>>n;
-    vector<int> a(n),b(n);
-    vector<int> al(n), bl(n);
-
-    for(int i=0;i<n;i++) {
-    	cin>>a[i];
-    	al[i] = trunc(log10(a[i])) + 1;
+	int n;
+	cin>>n;
+  string t;
+  cin>>t;
+  n--;
+  string ans = "";
+  while (n >= 0) {
+    if (t[n] == '0') {
+      n--;
+      string ab = string(1, t[n]);
+      n--;
+      ab = string(1, t[n]) + ab;
+      n--;
+      int bc = stoi(ab) - 1;
+      ans += 'a' + bc;
     }
-    for(int i=0;i<n;i++) {
-    	cin>>b[i];
-    	bl[i] = trunc(log10(b[i])) + 1;
+    else {
+      string ab = string(1, t[n]);
+      n--;
+      int bc = stoi(ab) - 1;
+      ans += 'a' + bc;
     }
+  }
+  reverse(ans.begin(), ans.end());
+  cout << ans<< "\n";
 
-    sort(a.begin(), a.end());
-    sort(al.begin(), al.end());
-	sort(b.begin(), b.end());
-	sort(bl.begin(), bl.end());
-
-	debug(al);
-    debug(a);
-    debug(b);
-    debug(bl);
-
-    for(int i=0;i<n;i++){
-    	int x = a[i];
-    	int y = al[i];
-
-    	int w = lower_bound(b.begin(), b.end(), x) - b.begin();
-
-    	if(a[i])
-    }
 }
  
 int main() { io

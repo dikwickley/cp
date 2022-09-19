@@ -32,40 +32,46 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 #define debug(x...)
 #endif
 //debugger end
- 
-void solve() {
-    int n;
-    cin>>n;
-    vector<int> a(n),b(n);
-    vector<int> al(n), bl(n);
 
-    for(int i=0;i<n;i++) {
-    	cin>>a[i];
-    	al[i] = trunc(log10(a[i])) + 1;
+
+ void solve() {
+  string s; 
+  cin >> s;
+  char st = s[0];
+  int n = s.size();
+  char en = s[n - 1];
+
+  map<char, vector<int>> map;
+  for (int i = 0; i < n; i++) {
+    map[s[i]].push_back(i);
+  }
+  vector<int> res;
+  if (st >= en) {
+  	for (auto it = map.rbegin(); it != map.rend(); it++) {
+      if (it->first > st || it->first < en) continue;
+      for (int p : it->second) {
+        res.push_back(p);
+      }
     }
-    for(int i=0;i<n;i++) {
-    	cin>>b[i];
-    	bl[i] = trunc(log10(b[i])) + 1;
+    
+  }
+  else {
+    for (auto it : map) {
+      if (it.first > en || it.first < st) continue;
+      for (int p : it.second) {
+        res.push_back(p);
+      }
     }
-
-    sort(a.begin(), a.end());
-    sort(al.begin(), al.end());
-	sort(b.begin(), b.end());
-	sort(bl.begin(), bl.end());
-
-	debug(al);
-    debug(a);
-    debug(b);
-    debug(bl);
-
-    for(int i=0;i<n;i++){
-    	int x = a[i];
-    	int y = al[i];
-
-    	int w = lower_bound(b.begin(), b.end(), x) - b.begin();
-
-    	if(a[i])
-    }
+  }
+  int ans = 0;
+  for(int i = 1; i < res.size(); ++i) {
+    ans += abs(s[res[i-1]] - s[res[i]]);
+  }
+  cout << ans << " " << res.size() << endl;
+  for(auto a: res) {
+    cout << a+1 << " ";
+  }
+  cout << endl;
 }
  
 int main() { io

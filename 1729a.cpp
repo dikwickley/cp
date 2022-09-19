@@ -34,38 +34,31 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 //debugger end
  
 void solve() {
-    int n;
-    cin>>n;
-    vector<int> a(n),b(n);
-    vector<int> al(n), bl(n);
+    int a,b,c;
+    cin>>a>>b>>c;
 
-    for(int i=0;i<n;i++) {
-    	cin>>a[i];
-    	al[i] = trunc(log10(a[i])) + 1;
-    }
-    for(int i=0;i<n;i++) {
-    	cin>>b[i];
-    	bl[i] = trunc(log10(b[i])) + 1;
-    }
 
-    sort(a.begin(), a.end());
-    sort(al.begin(), al.end());
-	sort(b.begin(), b.end());
-	sort(bl.begin(), bl.end());
+    int time1 = a-1;
+    int time2 = abs(b - c) +  abs(c - 1);
 
-	debug(al);
-    debug(a);
-    debug(b);
-    debug(bl);
+    debug(time1,time2);
 
-    for(int i=0;i<n;i++){
-    	int x = a[i];
-    	int y = al[i];
+    if(time1==time2){
+    	cout<<3<<endl;
 
-    	int w = lower_bound(b.begin(), b.end(), x) - b.begin();
+    	return ;
 
-    	if(a[i])
-    }
+    } 
+    if(time1>time2){
+    	cout<<2<<endl;
+
+    	return;
+    } 
+    	cout<<1<<endl;
+    
+
+
+
 }
  
 int main() { io
