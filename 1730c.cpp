@@ -34,9 +34,26 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 //debugger end
  
 void solve() {
-    vector<int> a = {1,2,3,4,5};
+  string s;
+  cin>>s;
 
-    debug(a);
+  vector<int> dig(10);
+  char t = '9';
+  reverse(s.begin(), s.end());
+
+  for (int i = 0; i < s.size(); i++) {
+    if (s[i] <= t) {
+      dig[s[i] - '0']++;
+      t = s[i];
+    } else {
+      dig[min(9, s[i] - '0' + 1)]++;
+    }
+  }
+
+  for (int i = 0; i <= 9; ++i) {
+    for (int j = 0; j < dig[i]; ++j) cout << i;
+  }
+  cout << endl;
 }
  
 int main() { io

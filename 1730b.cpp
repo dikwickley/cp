@@ -32,11 +32,47 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 #define debug(x...)
 #endif
 //debugger end
+
+double c(vector<int> x, vector<int> t, double m){
+	double total_time = 0;
+
+	for(int i=0;i<x.size();i++){
+		total_time += abs(x[i]-m) + t[i];
+	}
+
+	return total_time;
+}
  
 void solve() {
-    vector<int> a = {1,2,3,4,5};
+    int n;
+    cin>>n;
+    vector<int> x(n);
+    vector<int> t(n);
 
-    debug(a);
+    for(int i=0;i<n;i++) cin>>x[i];
+    for(int i=0;i<n;i++) cin>>t[i];
+
+  	
+
+  	double l = 1;
+  	double r = 100000000;
+  	
+  	while(l+0.0000001<r){
+
+
+  		debug(l,r);
+  	
+  	    int mid = (l+r)/2;
+  	    if( (c(x,t, mid-0.0000001)<=c(x,t,mid)) && (c(x,t,mid)<=c(x,t,mid+0.0000001))){
+  	    	r = mid;
+  	    }
+      	else {
+      		l = mid;
+      	}
+  	}
+  	debug(l,r);
+  	cout<<l<<endl;
+
 }
  
 int main() { io

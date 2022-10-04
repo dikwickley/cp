@@ -34,9 +34,31 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 //debugger end
  
 void solve() {
-    vector<int> a = {1,2,3,4,5};
+    int n,c;
+    cin>>n>>c;
 
-    debug(a);
+    map<int, int> m;
+
+    for(int i=0;i<n;i++) {
+    	int a;
+    	cin>>a;
+    	if(m.count(a)==0){
+    		m[a] = 1;
+    	} else {
+    		m[a] += 1;
+    	}
+    }
+
+    long long cost = 0;
+
+    for (auto i : m){
+
+        cost += min(i.second, c);
+    }
+
+    cout<<cost<<endl;
+
+
 }
  
 int main() { io
