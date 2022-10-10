@@ -34,7 +34,25 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 //debugger end
  
 void solve() {
-    
+    int n;
+    cin>>n;
+
+    int blocks = n/3;
+    int extra = n%3;
+
+    if(extra==0){
+    	cout<<blocks<<" "<<blocks+1<<" "<<blocks-1<<endl;return;
+    }
+
+    if(extra==1){
+    	cout<<blocks<<" "<<blocks+2<<" "<<blocks-1<<endl;return;
+    }
+
+    if(extra==2){
+ 		cout<<blocks+1<<" "<<blocks+2<<" "<<blocks-1<<endl;return;
+    }
+
+
 }
  
 int main() { io
@@ -42,7 +60,7 @@ int main() { io
         freopen("error.err", "w", stderr);
     #endif
     int t=1; 
-    cin>>t; h  
+    cin>>t; 
     while (t--) {
         solve();
     }

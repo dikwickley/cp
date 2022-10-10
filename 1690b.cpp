@@ -34,7 +34,41 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 //debugger end
  
 void solve() {
-    
+    int n;
+    cin>>n;
+
+    vector<long long> a(n),b(n);
+
+    for(int i=0;i<n;i++) cin>>a[i];
+    for(int i=0;i<n;i++) cin>>b[i];
+
+
+
+    long long inc = a[0] - b[0];
+
+	for(int i=0;i<n;i++){
+		inc = max(inc, a[i]-b[i]);
+	}
+
+    for(int i=0;i<n;i++){
+    	if(b[i]>a[i]){
+    		cout<<"NO"<<endl; return;
+    	}
+    	a[i]-=inc;
+    	if(a[i]<0) a[i]=0;
+    }
+
+
+    for(int i=0;i<n;i++){
+    	if(b[i]>a[i]){
+    		cout<<"NO"<<endl; return;
+    	}
+    	if(a[i]!=b[i]){
+    		cout<<"NO"<<endl; return;
+    	}
+    }
+
+    cout<<"YES"<<endl; return;
 }
  
 int main() { io
@@ -42,7 +76,7 @@ int main() { io
         freopen("error.err", "w", stderr);
     #endif
     int t=1; 
-    cin>>t; h  
+    cin>>t; 
     while (t--) {
         solve();
     }

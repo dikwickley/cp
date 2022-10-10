@@ -34,7 +34,16 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 //debugger end
  
 void solve() {
-    
+    int n,k;
+    cin>>n>>k;
+
+    vector<long long> a(n);
+
+    for(int i=0;i<n;i++) cin>>a[i];
+    sort(a.begin(), a.end());
+ 	debug(k);
+ 	debug(a);
+	
 }
  
 int main() { io
@@ -42,7 +51,7 @@ int main() { io
         freopen("error.err", "w", stderr);
     #endif
     int t=1; 
-    cin>>t; h  
+    cin>>t; 
     while (t--) {
         solve();
     }

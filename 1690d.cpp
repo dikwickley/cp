@@ -34,7 +34,32 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 //debugger end
  
 void solve() {
-    
+    int n,k;
+    cin>>n>>k;
+
+    string s;
+    cin>>s;
+    int b_count=0,  w_count=0;
+
+    for(int i=0;i<k;i++){
+    	if(s[i]=='W') w_count++;
+    	else b_count++;
+    }
+
+    int min_w = w_count;
+
+    for(int i=k;i<n;i++){
+    	if(s[i]=='W') w_count++;
+    	else b_count++;
+
+    	if(s[i-k]=='W') w_count--;
+    	else b_count--;
+
+    	min_w =  min(min_w, w_count);
+    }
+
+    cout<<min_w<<endl;
+
 }
  
 int main() { io
@@ -42,7 +67,7 @@ int main() { io
         freopen("error.err", "w", stderr);
     #endif
     int t=1; 
-    cin>>t; h  
+    cin>>t; 
     while (t--) {
         solve();
     }
