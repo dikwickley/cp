@@ -2,6 +2,22 @@
 #include <bits/stdc++.h>
 #define io  ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
 using namespace std;
+
+const int mod = 1e9 + 7;
+
+vector<int> sieve(int n){
+	vector<bool> p(n+1, true);
+	p[1] = false;
+	for(int i=2;i*i<=n;i++)
+		if(p[i]==true)
+			for(int j=i*i;j<=n; j+=i)
+				p[j] = false;
+	vector<int> primes;
+	for(int i=2;i<=n;i++)
+		if(p[i])
+			primes.push_back(i);
+	return primes;
+}
  
 //debugger start
 void __print(int x) {cerr << x;}
@@ -32,86 +48,20 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 #define debug(x...)
 #endif
 //debugger end
-
-
-
-
-vector<int> sieve(int n){
-	vector<bool> p(n+1, true);
-
-	p[1] = false;
-
-	for(int i=2;i*i<n;i++){
-		if(p[i]==true){
-			for(int j=i*i;j<=n; j+=i)
-				p[j] = false;
-		}
-	}
-
-	vector<int> primes;
-
-	for(int i=2;i<=n;i++)
-		if(p[i])
-			primes.push_back(i);
-
-	return primes;
-}
  
 void solve() {
-    int l,r;
-    cin>>l>>r;
+    int n;
+    cin>>n;
 
-    if(l==1) {
-    	vector<int> segmented_primes = sieve(r);
+    vector<int> p = sieve(n+1);
 
-    	for(int i=0;i<segmented_primes.size();i++) cout<<segmented_primes[i]<<" ";
-    	cout<<endl;
 
-    	return;
-    }
+    debug(p);
 
-    vector<int> pl =  sieve(l-1);
-
-    vector<bool> sp(r-l+1, true);
-
-    debug(pl);
-
-    for(int i=0;i<pl.size();i++){
-    	int  p = pl[i];
-
-    	int first = (l/p)*p;
-
-    	if(l%p != 0){
-    		first += p;
-    	}
-
-    	debug(first);
-
-    	if(first>r) break;
-
-    	for(int j=first;j<=r;j+=p){
-    		sp[j-l] = false;
-    	}
-    }
-
-    for(int i=l;i*i<=r;i++){
-    	if(sp[i-l]==true){
-
-    		for(int j=i*i;j<=r;j+=i){
-    			sp[j-l] = false;
-    		}
-    	}
-    }
-
-    
-
-    for(int i=0; i<sp.size();i++){
-    	if(sp[i])
-    		cout<<i+l<<" ";    		
-    }
-
-    cout<<endl;
-    
+    int a = p.size();
+    int b = n - p.size();
+    cout<<2<<endl;
+    cout<<min(a,b)<<" "<<max(a,b);
 }
  
 int main() { io
@@ -119,7 +69,7 @@ int main() { io
         freopen("error.err", "w", stderr);
     #endif
     int t=1; 
-    cin>>t; 
+    // cin>>t; 
     while (t--) {
         solve();
     }

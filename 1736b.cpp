@@ -32,85 +32,8 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 #define debug(x...)
 #endif
 //debugger end
-
-
-
-
-vector<int> sieve(int n){
-	vector<bool> p(n+1, true);
-
-	p[1] = false;
-
-	for(int i=2;i*i<n;i++){
-		if(p[i]==true){
-			for(int j=i*i;j<=n; j+=i)
-				p[j] = false;
-		}
-	}
-
-	vector<int> primes;
-
-	for(int i=2;i<=n;i++)
-		if(p[i])
-			primes.push_back(i);
-
-	return primes;
-}
  
 void solve() {
-    int l,r;
-    cin>>l>>r;
-
-    if(l==1) {
-    	vector<int> segmented_primes = sieve(r);
-
-    	for(int i=0;i<segmented_primes.size();i++) cout<<segmented_primes[i]<<" ";
-    	cout<<endl;
-
-    	return;
-    }
-
-    vector<int> pl =  sieve(l-1);
-
-    vector<bool> sp(r-l+1, true);
-
-    debug(pl);
-
-    for(int i=0;i<pl.size();i++){
-    	int  p = pl[i];
-
-    	int first = (l/p)*p;
-
-    	if(l%p != 0){
-    		first += p;
-    	}
-
-    	debug(first);
-
-    	if(first>r) break;
-
-    	for(int j=first;j<=r;j+=p){
-    		sp[j-l] = false;
-    	}
-    }
-
-    for(int i=l;i*i<=r;i++){
-    	if(sp[i-l]==true){
-
-    		for(int j=i*i;j<=r;j+=i){
-    			sp[j-l] = false;
-    		}
-    	}
-    }
-
-    
-
-    for(int i=0; i<sp.size();i++){
-    	if(sp[i])
-    		cout<<i+l<<" ";    		
-    }
-
-    cout<<endl;
     
 }
  
