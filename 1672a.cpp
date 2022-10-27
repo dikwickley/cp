@@ -77,25 +77,49 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 // #define int long long int
 const int mod = 1e9 + 7;
 
-gcd
-
 void solve() {
+	int n;
+	cin >> n;
+	vector<int> a(n);
+
+	int uncuttable = 0;
+	bool turn = false;
+
+	for (int i = 0; i < n; i++) {
+		cin >> a[i];
+		if (a[i] <= 2) {
+			uncuttable ++;
+		} else {
+			if ((a[i] - 2) % 2 == 0) {
+				turn = !turn;
+			}
+
+		}
+	}
+
+	if (turn == true) {
+		cout << "errorgorn" << endl;
+	} else {
+		cout << "maomao90" << endl;
+	}
+
+
 
 }
 
 int main() {
-    io
+	io
 #ifndef ONLINE_JUDGE
-    freopen("error.err", "w", stderr);
+	freopen("error.err", "w", stderr);
 #endif
-    int t = 1, t_count = 1;
-    cin >> t;
-    while (t--) {
+	int t = 1, t_count = 1;
+	cin >> t;
+	while (t--) {
 #ifndef ONLINE_JUDGE
-        cerr << "#tc: " << t_count << endl;
+		cerr << "#tc: " << t_count << endl;
 #endif
-        solve();
-        t_count++;
-    }
-    return 0;
+		solve();
+		t_count++;
+	}
+	return 0;
 }

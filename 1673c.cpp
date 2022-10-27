@@ -77,25 +77,23 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 // #define int long long int
 const int mod = 1e9 + 7;
 
-gcd
-
 void solve() {
 
 }
 
 int main() {
-    io
+	io
 #ifndef ONLINE_JUDGE
-    freopen("error.err", "w", stderr);
+	freopen("error.err", "w", stderr);
 #endif
-    int t = 1, t_count = 1;
-    cin >> t;
-    while (t--) {
+	int t = 1, t_count = 1;
+	cin >> t;
+	while (t--) {
 #ifndef ONLINE_JUDGE
-        cerr << "#tc: " << t_count << endl;
+		cerr << "#tc: " << t_count << endl;
 #endif
-        solve();
-        t_count++;
-    }
-    return 0;
+		solve();
+		t_count++;
+	}
+	return 0;
 }

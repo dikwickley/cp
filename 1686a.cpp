@@ -41,6 +41,20 @@
 #define io  ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
 using namespace std;
 
+vector<int> sieve(int n) {
+	vector<bool> p(n + 1, true);
+	p[1] = false;
+	for (int i = 2; i * i <= n; i++)
+		if (p[i] == true)
+			for (int j = i * i; j <= n; j += i)
+				p[j] = false;
+	vector<int> primes;
+	for (int i = 2; i <= n; i++)
+		if (p[i])
+			primes.push_back(i);
+	return primes;
+}
+
 //counter
 int __counter = 0;
 #define cnt cerr<<"l "<<__LINE__<<": "<<++__counter<<endl;
@@ -59,6 +73,7 @@ void __print(char x) {cerr << '\'' << x << '\'';}
 void __print(const char *x) {cerr << '\"' << x << '\"';}
 void __print(const string &x) {cerr << '\"' << x << '\"';}
 void __print(bool x) {cerr << (x ? "true" : "false");}
+
 template<typename T, typename V>
 void __print(const pair<T, V> &x) {cerr << '{'; __print(x.first); cerr << ','; __print(x.second); cerr << '}';}
 template<typename T>
@@ -77,25 +92,39 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 // #define int long long int
 const int mod = 1e9 + 7;
 
-gcd
-
 void solve() {
+	int n;
+	cin >> n;
+	vector<int> a(n);
 
+	int sum = 0;
+	for (int i = 0; i < n; i++) {
+		cin >> a[i];
+		sum += a[i];
+	}
+
+	for (int i = 0; i < n; i++) {
+		if (1.0 * (sum - a[i]) / (n - 1) == a[i]) {
+			debug(i, (sum - a[i]));
+			cout << "YES" << endl; return;
+		}
+	}
+	cout << "NO" << endl;
 }
 
 int main() {
-    io
+	io
 #ifndef ONLINE_JUDGE
-    freopen("error.err", "w", stderr);
+	freopen("error.err", "w", stderr);
 #endif
-    int t = 1, t_count = 1;
-    cin >> t;
-    while (t--) {
+	int t = 1, t_count = 1;
+	cin >> t;
+	while (t--) {
 #ifndef ONLINE_JUDGE
-        cerr << "#tc: " << t_count << endl;
+		cerr << "#tc: " << t_count << endl;
 #endif
-        solve();
-        t_count++;
-    }
-    return 0;
+		solve();
+		t_count++;
+	}
+	return 0;
 }

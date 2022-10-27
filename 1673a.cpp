@@ -77,25 +77,53 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 // #define int long long int
 const int mod = 1e9 + 7;
 
-gcd
-
 void solve() {
+	string s;
+	cin >> s;
+
+	if (s.size() == 1) {
+		cout << "Bob " << s[0] - 'a' + 1 << endl; return;
+	}
+
+	int sum = 0;
+	for (int i = 0; i < s.size(); i++) {
+		sum += s[i] - 'a' + 1;
+	}
+
+	if (s.size() % 2 == 0) {
+		cout << "Alice " << sum << endl; return;
+	}
+
+	int max_end = min(s[0] - 'a' + 1, s[s.size() - 1] - 'a' + 1);
+
+	debug(sum);
+	debug(max_end);
+	int Alice = sum - max_end;
+	int Bob = max_end;
+
+	if (Alice > Bob) {
+		cout << "Alice " << Alice - Bob << endl; return;
+	}
+
+	cout << "Bob " << Bob - Alice << endl; return;
+
+
 
 }
 
 int main() {
-    io
+	io
 #ifndef ONLINE_JUDGE
-    freopen("error.err", "w", stderr);
+	freopen("error.err", "w", stderr);
 #endif
-    int t = 1, t_count = 1;
-    cin >> t;
-    while (t--) {
+	int t = 1, t_count = 1;
+	cin >> t;
+	while (t--) {
 #ifndef ONLINE_JUDGE
-        cerr << "#tc: " << t_count << endl;
+		cerr << "#tc: " << t_count << endl;
 #endif
-        solve();
-        t_count++;
-    }
-    return 0;
+		solve();
+		t_count++;
+	}
+	return 0;
 }

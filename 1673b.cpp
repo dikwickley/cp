@@ -77,25 +77,48 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 // #define int long long int
 const int mod = 1e9 + 7;
 
-gcd
-
 void solve() {
+	string s;
+	cin >> s;
+	int n = s.size();
+	map<int, vector<int>> m;
+
+	for (int i = 0; i < n; i++) {
+		if (m.count(s[i]) == 0) {
+			m[s[i]] = {i};
+		} else {
+			m[s[i]].push_back(i);
+		}
+	}
+
+
+	for (auto const& i : m) {
+		vector<int> indices = i.second;
+		for (int j = 1; j < indices.size(); j++) {
+			if (abs(indices[j - 1] - indices[j]) != m.size()) {
+				cout << "NO" << endl; return;
+			}
+		}
+	}
+
+	cout << "YES" << endl; return;
+
 
 }
 
 int main() {
-    io
+	io
 #ifndef ONLINE_JUDGE
-    freopen("error.err", "w", stderr);
+	freopen("error.err", "w", stderr);
 #endif
-    int t = 1, t_count = 1;
-    cin >> t;
-    while (t--) {
+	int t = 1, t_count = 1;
+	cin >> t;
+	while (t--) {
 #ifndef ONLINE_JUDGE
-        cerr << "#tc: " << t_count << endl;
+		cerr << "#tc: " << t_count << endl;
 #endif
-        solve();
-        t_count++;
-    }
-    return 0;
+		solve();
+		t_count++;
+	}
+	return 0;
 }
