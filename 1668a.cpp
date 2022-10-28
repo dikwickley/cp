@@ -74,65 +74,54 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 #endif
 //debugger end
 
-#define int long long int
+// #define int long long int
 const int mod = 1e9 + 7;
-int dp[1000001] = {0};
-int topdown(int n, int k) {
-    if (n == 0) {
-        return 1;
-    }
-    if (n < 0) {
-        return 0;
-    }
-
-    if (dp[n] != 0) return dp[n];
-
-    int sum = 0;
-    for (int i = 1; i <= k; i++) {
-        dp[n - i] = topdown(n - i, k);
-        sum += dp[n - i];
-    }
-
-    return sum;
-}
-
-int dp2[1000001] = {0};
-
-int bottomup(int n, int k) {
-    for (int i = 0; i < k - 1; i++) {
-        dp2[i] = 1;
-    }
-
-    for (int i = k - 1; i <= n; i++) {
-        for (int j = 1; j <= k; j++) {
-            dp2[i] += dp2[i - j];
-        }
-    }
-
-    return dp2[n];
-}
 
 void solve() {
-    int n, k;
-    cin >> n >> k;
-    cout << topdown(n, k) << endl;
-    cout << bottomup(n, k) << endl;
+	int n, m;
+	cin >> n >> m;
+
+	// if (n == 1 || m == 1) {
+	// 	cout << -1 << endl; return;
+	// }
+
+	int a = max(n, m);
+	int b = min(n, m);
+
+	if (b == 1 && a > 2) {
+		cout << -1 << endl; return;
+	}
+
+	int count = b - 1 + b - 1;
+
+	int left = a - b;
+
+	count += 2;
+
+	if (left % 2 == 0) {
+		count += (left - 1) * 2;
+	} else {
+		count += (left - 2) * 2 + 1;
+	}
+
+	cout << count << endl;
+
 
 }
 
-int32_t main() {
-    io
+int main() {
+	io
 #ifndef ONLINE_JUDGE
-    freopen("error.err", "w", stderr);
+	freopen("error.err", "w", stderr);
 #endif
-    int t = 1, t_count = 1;
-    cin >> t;
-    while (t--) {
+	int t = 1, t_count = 1;
+	cin >> t;
+	while (t--) {
 #ifndef ONLINE_JUDGE
-        cerr << "#tc: " << t_count << endl;
+		cerr << "#tc: " << t_count << endl;
 #endif
-        solve();
-        t_count++;
-    }
-    return 0;
+		solve();
+		t_count++;
+	}
+	return 0;
 }

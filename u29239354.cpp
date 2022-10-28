@@ -113,6 +113,7 @@ int bottomup(int n, int k) {
 }
 
 void solve() {
+    //269. n-k ladders
     int n, k;
     cin >> n >> k;
     cout << topdown(n, k) << endl;

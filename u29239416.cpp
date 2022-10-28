@@ -76,63 +76,52 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 
 #define int long long int
 const int mod = 1e9 + 7;
+
 int dp[1000001] = {0};
-int topdown(int n, int k) {
-    if (n == 0) {
-        return 1;
-    }
-    if (n < 0) {
-        return 0;
-    }
 
-    if (dp[n] != 0) return dp[n];
+int topdown(vector<int> a, int i, int n) {
+	if (i == n - 1) {
+		return 0;
+	}
+	if ( i >= n) {
+		return 0;
+	}
 
-    int sum = 0;
-    for (int i = 1; i <= k; i++) {
-        dp[n - i] = topdown(n - i, k);
-        sum += dp[n - i];
-    }
+	if (dp[i] != 0) return dp[i];
 
-    return sum;
-}
-
-int dp2[1000001] = {0};
-
-int bottomup(int n, int k) {
-    for (int i = 0; i < k - 1; i++) {
-        dp2[i] = 1;
-    }
-
-    for (int i = k - 1; i <= n; i++) {
-        for (int j = 1; j <= k; j++) {
-            dp2[i] += dp2[i - j];
-        }
-    }
-
-    return dp2[n];
+	int next = INT_MAX;
+	for (int j = 1; j <= a[i]; j++) {
+		next = min(next, topdown(a, i + j, n));
+		dp[i + j] = next;
+	}
+	return 1 + next;
 }
 
 void solve() {
-    int n, k;
-    cin >> n >> k;
-    cout << topdown(n, k) << endl;
-    cout << bottomup(n, k) << endl;
+	// 272. Minimum Jumps
 
+	int n;
+	cin >> n;
+	vector<int> a(n);
+
+	for (int i = 0; i < n; i++) cin >> a[i];
+
+	cout << topdown(a, 0, n) << endl;
 }
 
 int32_t main() {
-    io
+	io
 #ifndef ONLINE_JUDGE
-    freopen("error.err", "w", stderr);
+	freopen("error.err", "w", stderr);
 #endif
-    int t = 1, t_count = 1;
-    cin >> t;
-    while (t--) {
+	int t = 1, t_count = 1;
+	cin >> t;
+	while (t--) {
 #ifndef ONLINE_JUDGE
-        cerr << "#tc: " << t_count << endl;
+		cerr << "#tc: " << t_count << endl;
 #endif
-        solve();
-        t_count++;
-    }
-    return 0;
+		solve();
+		t_count++;
+	}
+	return 0;
 }
